@@ -8,6 +8,7 @@ Emily Hu
 - Node.js, npm, Vite -> Build and runtime
 - Three.js -> Display
 - Axios -> API calling helper
+- JS, TS
 - FastF1 API
 
 ## Build Instructions
