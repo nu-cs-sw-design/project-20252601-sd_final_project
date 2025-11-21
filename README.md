@@ -13,3 +13,4 @@ Emily Hu
 
 ## Build Instructions
 HOW TO BUILD YOUR PROJECT.
+npm run dev
