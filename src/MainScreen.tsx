@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from 'react'
 import {
-
+  Typography,
+  Box,
   FormControl,
   InputLabel,
   Select,
@@ -28,8 +29,7 @@ type Race = {
 function MainScreen(){
   // Mock data for now, will probably make it read from JSON instead later
   // Or even API call if I have time
-
-  const emptyDriver: Driver = {firstName: "N/A", lastName: "N/A", abbreviation: "N/A", number: -1};
+  const emptyDriver: Driver = {firstName: "N/A", lastName: "N/A", abbreviation: "N/A", number: 0};
 
   const drivers: Driver[] = [{
     firstName: "Max",
@@ -51,13 +51,14 @@ function MainScreen(){
     year: 2025,
     name: "Miami",
     driversInQ3: [1, 11, 4, 81, 63, 44, 16, 55, 18, 23]
-
   }];
 
   const [year, setYear] = useState<number>();
   const [raceList, setRaceList] = useState<Race[]>([]);
   const [raceName, setRaceName] = useState<string>("");
   const [driverList, setDriverList] = useState<Driver[]>([]);
+  const [driverNumber, setDriverNumber] = useState<number>();
+
   const [driver, setDriver] = useState<Driver>(emptyDriver);
 
   const handleYearSelected = (event: SelectChangeEvent<number>) => {
@@ -69,6 +70,7 @@ function MainScreen(){
 
     setRaceName("");
     setDriverList([]);
+    setDriverNumber(undefined);
     setDriver(emptyDriver);
   };
 
@@ -84,11 +86,13 @@ function MainScreen(){
     const validDriverNumbers = race.driversInQ3;
     const filteredDrivers = drivers.filter(d => validDriverNumbers.includes(d.number));
     setDriverList(filteredDrivers);
+    setDriverNumber(undefined);
     setDriver(emptyDriver);
   };
 
   const handleDriverSelected = (event: SelectChangeEvent<number>) => {
     const driverNumber = event.target.value;
+    setDriverNumber(driverNumber);
     const driver = drivers.find(d => d.number === driverNumber);
     if(driver === undefined){
       setDriver(emptyDriver);
@@ -99,9 +103,19 @@ function MainScreen(){
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Lap Viewer</h1>
-      <Stack direction="row" spacing={2} sx={{width: '100%', justifyContent: 'space-between'}}>
+    <Box
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Typography variant="h2" gutterBottom>
+        Lap Comparison Tool
+      </Typography>
+      <Stack direction="row" spacing={2} sx={{}}>
         <FormControl fullWidth margin="normal" sx={{minWidth: 200}}>
           <InputLabel>Year</InputLabel>
           <Select value={year} label="Year" onChange={handleYearSelected}>
@@ -123,7 +137,7 @@ function MainScreen(){
 
         <FormControl fullWidth margin="normal" disabled={raceName === ""} sx={{minWidth: 200}}>
           <InputLabel>Driver</InputLabel>
-          <Select value={driver.number} label="Driver" onChange={handleDriverSelected}>
+          <Select value={driverNumber} label="Driver" onChange={handleDriverSelected}>
             {driverList.map((driver) => (
               <MenuItem value={driver.number}>
                 {driver.number} {driver.firstName} {driver.lastName} 
@@ -132,7 +146,7 @@ function MainScreen(){
           </Select>
         </FormControl>
       </Stack>
-    </div>
+    </Box>
   );
 };
 export default MainScreen;
