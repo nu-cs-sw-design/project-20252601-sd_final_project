@@ -12,5 +12,4 @@ Emily Hu
 - FastF1 API
 
 ## Build Instructions
-HOW TO BUILD YOUR PROJECT.
 npm run dev
