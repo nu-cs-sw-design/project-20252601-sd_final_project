@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Typography,
   Box,
@@ -6,7 +7,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Stack
+  Stack,
+  Button
 } from "@mui/material";
 
 import type{
@@ -53,24 +55,24 @@ function MainScreen(){
     driversInQ3: [1, 11, 4, 81, 63, 44, 16, 55, 18, 23]
   }];
 
-  const [year, setYear] = useState<number>();
+  const navigate = useNavigate()
+  const [year, setYear] = useState<string>("");
   const [raceList, setRaceList] = useState<Race[]>([]);
   const [raceName, setRaceName] = useState<string>("");
   const [driverList, setDriverList] = useState<Driver[]>([]);
-  const [driverNumber, setDriverNumber] = useState<number>();
-
+  const [driverNumber, setDriverNumber] = useState<string>("");
   const [driver, setDriver] = useState<Driver>(emptyDriver);
 
-  const handleYearSelected = (event: SelectChangeEvent<number>) => {
+  const handleYearSelected = (event: SelectChangeEvent) => {
     const year = event.target.value;
     setYear(year);
 
-    const filtered = races.filter(r => r.year === year);
+    const filtered = races.filter(r => r.year === Number(year));
     setRaceList(filtered);
 
     setRaceName("");
     setDriverList([]);
-    setDriverNumber(undefined);
+    setDriverNumber("");
     setDriver(emptyDriver);
   };
 
@@ -86,20 +88,24 @@ function MainScreen(){
     const validDriverNumbers = race.driversInQ3;
     const filteredDrivers = drivers.filter(d => validDriverNumbers.includes(d.number));
     setDriverList(filteredDrivers);
-    setDriverNumber(undefined);
+    setDriverNumber("");
     setDriver(emptyDriver);
   };
 
-  const handleDriverSelected = (event: SelectChangeEvent<number>) => {
+  const handleDriverSelected = (event: SelectChangeEvent) => {
     const driverNumber = event.target.value;
     setDriverNumber(driverNumber);
-    const driver = drivers.find(d => d.number === driverNumber);
+    const driver = drivers.find(d => d.number === Number(driverNumber));
     if(driver === undefined){
       setDriver(emptyDriver);
     }
     else{
       setDriver(driver);
     }
+  };
+
+  const handleSubmit = () => {
+    navigate(`/results/${year}/${raceName}/${driverNumber}`);
   };
 
   return (
@@ -146,6 +152,9 @@ function MainScreen(){
           </Select>
         </FormControl>
       </Stack>
+      <Button variant="contained" disabled={driver == emptyDriver} onClick={handleSubmit} sx={{mt: 3}}>
+        Submit
+      </Button>
     </Box>
   );
 };
