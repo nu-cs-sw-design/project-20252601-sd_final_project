@@ -15,18 +15,7 @@ import type{
   SelectChangeEvent
 } from "@mui/material";
 
-type Driver = {
-  firstName: string,
-  lastName: string,
-  abbreviation: string,
-  number: number
-};
-
-type Race = {
-  year: number,
-  name: string,
-  driversInQ3: number[],
-};
+import type {Driver, Race} from "./types.tsx";
 
 function MainScreen(){
   // Mock data for now, will probably make it read from JSON instead later

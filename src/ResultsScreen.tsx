@@ -13,19 +13,8 @@ import {
 import type{
   SelectChangeEvent
 } from "@mui/material";
+import type {Driver, Race} from "./types.tsx";
 
-type Driver = {
-  firstName: string,
-  lastName: string,
-  abbreviation: string,
-  number: number
-};
-
-type Race = {
-  year: number,
-  name: string,
-  driversInQ3: number[],
-};
 
 function ResultsScreen(){
   const { year, race, driverNumber } = useParams();
