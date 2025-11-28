@@ -11,4 +11,10 @@ type Race = {
   driversInQ3: number[],
 };
 
-export type {Race, Driver};
+type Point = {
+  x: number,
+  y: number
+};
+
+
+export type {Race, Driver, Point};

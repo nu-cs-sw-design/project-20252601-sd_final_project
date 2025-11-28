@@ -16,33 +16,12 @@ import type{
 } from "@mui/material";
 
 import type {Driver, Race} from "./types.tsx";
+import {drivers, driverNumberToDriver, races} from "./constants.tsx";
 
 function MainScreen(){
   // Mock data for now, will probably make it read from JSON instead later
   // Or even API call if I have time
   const emptyDriver: Driver = {firstName: "N/A", lastName: "N/A", abbreviation: "N/A", number: 0};
-
-  const drivers: Driver[] = [{
-    firstName: "Max",
-    lastName: "Verstappen",
-    abbreviation: "VER",
-    number: 1,
-  },{
-    firstName: "Oscar",
-    lastName: "Piastri",
-    abbreviation: "PIA",
-    number: 81,
-  }];
-
-  const races: Race[] = [{
-    year: 2025,
-    name: "Suzuka",
-    driversInQ3: [1, 16, 55, 63, 44, 81, 11, 4, 18, 14]
-  },{
-    year: 2025,
-    name: "Miami",
-    driversInQ3: [1, 11, 4, 81, 63, 44, 16, 55, 18, 23]
-  }];
 
   const navigate = useNavigate()
   const [year, setYear] = useState<string>("");
@@ -84,7 +63,7 @@ function MainScreen(){
   const handleDriverSelected = (event: SelectChangeEvent) => {
     const driverNumber = event.target.value;
     setDriverNumber(driverNumber);
-    const driver = drivers.find(d => d.number === Number(driverNumber));
+    const driver = driverNumberToDriver[Number(driverNumber)];
     if(driver === undefined){
       setDriver(emptyDriver);
     }
