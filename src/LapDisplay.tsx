@@ -9,6 +9,7 @@ const canvasWidth = 800;
 const canvasHeight = 600;
 
 export default function LapDisplay({ pts, color }: LapDisplayProps) {
+  if (pts.length === 0) return null; // or a loading placeholder
   const xs = pts.map(p => p.x);
   const ys = pts.map(p => p.y);
 
@@ -21,14 +22,15 @@ export default function LapDisplay({ pts, color }: LapDisplayProps) {
   const scaleY = canvasHeight / (maxY - minY);
 
   const scale = Math.min(scaleX, scaleY);
-  const path = pts
-    .map((p, i) => (i === 0 ? `M ${p.x*scale},${p.y*scale}` : `L ${p.x*scale},${p.y*scale}`))
-    .join(" ");
-
   return (
     <div style={{ position: "relative" }}>
-      <svg width={canvasWidth} height={canvasHeight} viewBox={`${minX*scale} ${minY*scale} ${canvasWidth} ${canvasHeight}`}>
-        <path d={path} stroke={color} fill="none" strokeWidth={3} />
+      <svg width={canvasWidth} height={canvasHeight} viewBox={`${Math.floor(minX*scale) - 10} ${Math.floor(minY*scale)- 10} ${canvasWidth + 20} ${canvasHeight + 20}`}>
+          <path
+            d={pts.map((p, i) => (i === 0 ? `M ${p.x*scale},${p.y*scale}` : `L ${p.x*scale},${p.y*scale}`)).join(" ")}
+            stroke="blue"
+            fill="none"
+            strokeWidth={3}
+        />
       </svg>
     </div>
   );
