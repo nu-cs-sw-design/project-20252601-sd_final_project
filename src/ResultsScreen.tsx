@@ -41,9 +41,10 @@ function ResultsScreen(){
   useEffect(() => {
     if (!jsonData) return;
 
-    const data = jsonData["smooth_location"]
-      .map(([x, y]: [number, number]) => ({ x, y }));
-
+    // const data = jsonData["smooth_location"]
+    //   .map(([x, y]: [number, number]) => ({ x, y }));
+    const data = jsonData["location"]
+      .map(([x, y, _]: [number, number, number]) => ({ x, y }));
     setPoints(data);
   }, [jsonData]);
 
