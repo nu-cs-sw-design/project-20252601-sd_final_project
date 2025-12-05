@@ -18,7 +18,7 @@ import type{
 import type {Driver, Race} from "./types.tsx";
 import {drivers, races} from "./constants.tsx";
 
-export default function SingleAnalysisScreen(){
+export default function SingleSelectionScreen(){
   // Mock data for now, will probably make it read from JSON instead later
   // Or even API call if I have time
   const navigate = useNavigate()

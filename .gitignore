@@ -282,3 +282,5 @@ dist-ssr
 *.sw?
 
 cache
+
+*.ipynb

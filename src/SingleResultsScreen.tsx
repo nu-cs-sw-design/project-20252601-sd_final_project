@@ -20,7 +20,7 @@ type LapJSON = {
   [key: string]: any; // for any other unknown fields
 };
 
-function ResultsScreen(){
+export default function SingleResultsScreen(){
   const { year, race, driverNumber } = useParams();
   const driver = driverNumberToDriver[Number(driverNumber)];
   const [jsonData, setJsonData] = useState<LapJSON|null>(null);
@@ -185,4 +185,3 @@ function ResultsScreen(){
     </Box>
   );
 };
-export default ResultsScreen;

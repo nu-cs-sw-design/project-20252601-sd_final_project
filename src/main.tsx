@@ -1,10 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import SingleAnalysisScreen from './SingleAnalysisScreen.tsx'
-import ResultsScreen from './ResultsScreen.tsx'
+import SingleSelectionScreen from './SingleSelectionScreen.tsx'
+import SingleResultsScreen from './SingleResultsScreen.tsx'
 import WelcomeScreen from './WelcomeScreen.tsx'
 import ComparisonScreen from './ComparisonScreen.tsx'
+import ComparisonResultScreen from './ComparisonResultScreen.tsx'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
@@ -12,9 +14,10 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomeScreen/>} />
-        <Route path="/single" element={<SingleAnalysisScreen/>} />
+        <Route path="/single" element={<SingleSelectionScreen/>} />
         <Route path="/compare" element={<ComparisonScreen/>} />
-        <Route path="/results/:year/:race/:driverNumber" element={<ResultsScreen/>} />
+        <Route path="/results/:year/:race/:driverNumber" element={<SingleResultsScreen/>} />
+        <Route path="/results/:year/:race/:firstDriverNumber/:secondDriverNumer" element={<ComparisonResultScreen/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
