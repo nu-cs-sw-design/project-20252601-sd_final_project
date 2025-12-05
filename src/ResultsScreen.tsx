@@ -5,20 +5,14 @@ import {
   Box,
   ToggleButtonGroup,
   ToggleButton,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Stack
 } from "@mui/material";
 
-import type{
-  SelectChangeEvent
-} from "@mui/material";
-
 import type {Driver, Race, Point} from "./types.tsx";
+import type {LegendProps} from "./LegendProp.tsx";
 import {drivers, driverNumberToDriver, races, driverColor} from "./constants.tsx";
 import LapDisplay from "./LapDisplay.tsx";
+import {Legend} from "./LegendProp.tsx";
 
 type LapJSON = {
   smooth_location: [number, number][];
@@ -35,6 +29,7 @@ function ResultsScreen(){
   const [place, setPlace] = useState<string>("");
   const [colors, setColors] = useState<string[]>([]);
   const [selected, setSelected] = useState<string>("none");
+  const [legend, setLegend] = useState<LegendProps>({type: "none"});
 
   useEffect(() => {
     fetch(`/data/${driver.abbreviation.toLowerCase()}_${race?.toLowerCase()}_${year}.json`)
@@ -66,6 +61,10 @@ function ResultsScreen(){
     if(!jsonData || !selected) return;
 
     if(selected === "none"){
+      setLegend({
+        ...legend,
+        type: "none"
+      });
       if(driverNumber){
         setColors(new Array(points.length).fill(driverColor[Number(driverNumber)]));
       }
@@ -82,19 +81,59 @@ function ResultsScreen(){
           return "red";
         }
       }));
+      setLegend({
+        ...legend,
+        type: "categorical",
+        categories: [{label: "Break", color: "green"}, {label: "Coast/Throttle", color: "red"}]
+      });
     }
-    else if(selected === "throttle"){
-      setColors(jsonData["throttle"].map((item: number) => {
-        let tone = item/100 * 256 * 0.9;
-        return `rgb(${tone}, ${tone}, ${tone})`
-      }));
+    else if (selected === "throttle") {
+      const throttleValues: number[] = jsonData["throttle"];
+      const minThrottle = Math.min(...throttleValues);
+      const maxThrottle = Math.max(...throttleValues);
+
+      const throttleColors = throttleValues.map((item: number) => {
+        const tone = (item / 100) * 256 * 0.9; // scale to 0-230
+        return `rgb(${tone}, ${tone}, ${tone})`;
+      });
+      setColors(throttleColors);
+
+      const minTone = (minThrottle / 100) * 256 * 0.9;
+      const maxTone = (maxThrottle / 100) * 256 * 0.9;
+      const minColor = `rgb(${minTone}, ${minTone}, ${minTone})`;
+      const maxColor = `rgb(${maxTone}, ${maxTone}, ${maxTone})`;
+
+      setLegend({
+        ...legend,
+        type: "gradient",
+        colors: [minColor, maxColor],
+        minLabel: `${minThrottle}%`,
+        maxLabel: `${maxThrottle}%`,
+      });
     }
-    else if(selected === "speed"){
-      let maxSpeed = Math.max(...jsonData["speed"]);
-      setColors(jsonData["speed"].map((item: number) => {
-        let tone = item/maxSpeed * 256 * 0.9;
-        return `rgb(${tone}, ${tone}, ${tone})`
-      }));
+    else if (selected === "speed") {
+      const speedValues: number[] = jsonData["speed"];
+      const minSpeed = Math.min(...speedValues);
+      const maxSpeed = Math.max(...speedValues);
+
+      const speedColors = speedValues.map((item: number) => {
+        const tone = (item / maxSpeed) * 256 * 0.9; // scale to 0-230
+        return `rgb(${tone}, ${tone}, ${tone})`;
+      });
+      setColors(speedColors);
+
+      const minTone = (minSpeed / maxSpeed) * 256 * 0.9;
+      const maxTone = 256 * 0.9;
+      const minColor = `rgb(${minTone}, ${minTone}, ${minTone})`;
+      const maxColor = `rgb(${maxTone}, ${maxTone}, ${maxTone})`;
+
+      setLegend({
+        ...legend,
+        type: "gradient",
+        colors: [minColor, maxColor],
+        minLabel: `${minSpeed.toFixed(1)} km/h`,
+        maxLabel: `${maxSpeed.toFixed(1)} km/h`,
+      });
     }
   }, [selected]);
 
@@ -140,6 +179,7 @@ function ResultsScreen(){
             <ToggleButton value="throttle">Throttle</ToggleButton>
             <ToggleButton value="speed">Speed</ToggleButton>
           </ToggleButtonGroup>
+          <Legend {...legend}></Legend>
         </Stack>
       </Stack>
     </Box>

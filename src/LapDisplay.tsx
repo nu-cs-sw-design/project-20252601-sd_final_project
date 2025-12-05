@@ -1,6 +1,6 @@
 import type {Point} from "./types.tsx";
 
-type LapDisplayProps = {
+interface LapDisplayProps{
   pts: Point[];
   colors: string[];
 };
@@ -8,7 +8,7 @@ type LapDisplayProps = {
 const canvasWidth = 800;
 const canvasHeight = 600;
 
-export default function LapDisplay({ pts, colors }: LapDisplayProps) {
+export default function LapDisplay({ pts, colors }: LapDisplayProps){
   if(pts.length === 0) return null; // or a loading placeholder
   const xs = pts.map(p => p.x);
   const ys = pts.map(p => p.y);
