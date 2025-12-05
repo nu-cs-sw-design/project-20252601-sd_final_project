@@ -16,20 +16,17 @@ import type{
 } from "@mui/material";
 
 import type {Driver, Race} from "./types.tsx";
-import {drivers, driverNumberToDriver, races} from "./constants.tsx";
+import {drivers, races} from "./constants.tsx";
 
-function MainScreen(){
+export default function SingleAnalysisScreen(){
   // Mock data for now, will probably make it read from JSON instead later
-  // Or even API call ifI have time
-  const emptyDriver: Driver = {firstName: "N/A", lastName: "N/A", abbreviation: "N/A", number: 0};
-
+  // Or even API call if I have time
   const navigate = useNavigate()
   const [year, setYear] = useState<string>("");
   const [raceList, setRaceList] = useState<Race[]>([]);
   const [raceName, setRaceName] = useState<string>("");
   const [driverList, setDriverList] = useState<Driver[]>([]);
   const [driverNumber, setDriverNumber] = useState<string>("");
-  const [driver, setDriver] = useState<Driver>(emptyDriver);
 
   const handleYearSelected = (event: SelectChangeEvent) => {
     const year = event.target.value;
@@ -41,7 +38,6 @@ function MainScreen(){
     setRaceName("");
     setDriverList([]);
     setDriverNumber("");
-    setDriver(emptyDriver);
   };
 
   const handleRaceSelected = (event: SelectChangeEvent) => {
@@ -57,19 +53,11 @@ function MainScreen(){
     const filteredDrivers = drivers.filter(d => validDriverNumbers.includes(d.number));
     setDriverList(filteredDrivers);
     setDriverNumber("");
-    setDriver(emptyDriver);
   };
 
   const handleDriverSelected = (event: SelectChangeEvent) => {
     const driverNumber = event.target.value;
     setDriverNumber(driverNumber);
-    const driver = driverNumberToDriver[Number(driverNumber)];
-    if(driver === undefined){
-      setDriver(emptyDriver);
-    }
-    else{
-      setDriver(driver);
-    }
   };
 
   const handleSubmit = () => {
@@ -120,10 +108,9 @@ function MainScreen(){
           </Select>
         </FormControl>
       </Stack>
-      <Button variant="contained" disabled={driver == emptyDriver} onClick={handleSubmit} sx={{mt: 3}}>
+      <Button variant="contained" disabled={driverNumber == ""} onClick={handleSubmit} sx={{mt: 3}}>
         Submit
       </Button>
     </Box>
   );
 };
-export default MainScreen;

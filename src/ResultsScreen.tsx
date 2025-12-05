@@ -8,9 +8,9 @@ import {
   Stack
 } from "@mui/material";
 
-import type {Driver, Race, Point} from "./types.tsx";
+import type {Point} from "./types.tsx";
 import type {LegendProps} from "./LegendProp.tsx";
-import {drivers, driverNumberToDriver, races, driverColor} from "./constants.tsx";
+import {driverNumberToDriver, driverColor} from "./constants.tsx";
 import LapDisplay from "./LapDisplay.tsx";
 import {Legend} from "./LegendProp.tsx";
 
