@@ -23,4 +23,9 @@ name: "Miami",
 driversInQ3: [1, 11, 4, 81, 63, 44, 16, 55, 18, 23]
 }];
 
-export {drivers, driverNumberToDriver, races};
+const driverColor: Record<number, string> = {
+  1: "Blue",
+  81: "Orange"
+};
+
+export {drivers, driverNumberToDriver, races, driverColor};

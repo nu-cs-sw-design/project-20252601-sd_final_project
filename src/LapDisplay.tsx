@@ -2,14 +2,14 @@ import type {Point} from "./types.tsx";
 
 type LapDisplayProps = {
   pts: Point[];
-  color: string;
+  colors: string[];
 };
 
 const canvasWidth = 800;
 const canvasHeight = 600;
 
-export default function LapDisplay({ pts, color }: LapDisplayProps) {
-  if (pts.length === 0) return null; // or a loading placeholder
+export default function LapDisplay({ pts, colors }: LapDisplayProps) {
+  if(pts.length === 0) return null; // or a loading placeholder
   const xs = pts.map(p => p.x);
   const ys = pts.map(p => p.y);
 
@@ -25,12 +25,21 @@ export default function LapDisplay({ pts, color }: LapDisplayProps) {
   return (
     <div style={{ position: "relative" }}>
       <svg width={canvasWidth} height={canvasHeight} viewBox={`${Math.floor(minX*scale) - 10} ${Math.floor(minY*scale)- 10} ${canvasWidth + 20} ${canvasHeight + 20}`}>
-          <path
-            d={pts.map((p, i) => (i === 0 ? `M ${p.x*scale},${p.y*scale}` : `L ${p.x*scale},${p.y*scale}`)).join(" ")}
-            stroke="blue"
-            fill="none"
-            strokeWidth={3}
-        />
+        {pts.slice(1).map((p, i) => {
+          const p0 = pts[i];
+          const p1 = p;
+          return (
+            <line
+              key={i}
+              x1={p0.x * scale}
+              y1={p0.y * scale}
+              x2={p1.x * scale}
+              y2={p1.y * scale}
+              stroke={colors[i] || "black"}
+              strokeWidth={5}
+            />
+          );
+        })}
       </svg>
     </div>
   );

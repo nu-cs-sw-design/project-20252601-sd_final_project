@@ -20,7 +20,7 @@ import {drivers, driverNumberToDriver, races} from "./constants.tsx";
 
 function MainScreen(){
   // Mock data for now, will probably make it read from JSON instead later
-  // Or even API call if I have time
+  // Or even API call ifI have time
   const emptyDriver: Driver = {firstName: "N/A", lastName: "N/A", abbreviation: "N/A", number: 0};
 
   const navigate = useNavigate()
@@ -49,7 +49,7 @@ function MainScreen(){
     setRaceName(raceName);
     const yearNumber = Number(year);
     const race = races.find(r => r.year === yearNumber && r.name === raceName);
-    if (!race) {
+    if(!race) {
       setDriverList([]);
       return;
     }
