@@ -31,20 +31,20 @@ export default function SingleResultsScreen(){
   const [selected, setSelected] = useState<string>("none");
   const [legend, setLegend] = useState<LegendProps>({type: "none"});
 
-  useEffect(() => {
+  useEffect(() => { // readJson
     fetch(`/data/${driver.abbreviation.toLowerCase()}_${race?.toLowerCase()}_${year}.json`)
       .then(res => res.json())
       .then(data => setJsonData(data))
   }, [driverNumber, year, race]);
 
-  useEffect(() => {
+  useEffect(() => { // parseLocation
     if(!jsonData) return;
     const data = jsonData["location"]
       .map(([x, y, _]: [number, number, number]) => ({ x, y }));
     setPoints(data);
   }, [jsonData]);
 
-  useEffect(() => {
+  useEffect(() => { // parseMetadata
     if(!jsonData) return;
 
     setLapTime(jsonData["lap_time"]);
@@ -57,7 +57,7 @@ export default function SingleResultsScreen(){
     }
   }, [jsonData]);
 
-  useEffect(() => {
+  useEffect(() => { // makeDisplay
     if(!jsonData || !selected) return;
 
     if(selected === "none"){
