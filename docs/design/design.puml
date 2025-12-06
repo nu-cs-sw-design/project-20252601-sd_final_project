@@ -1,2 +1,134 @@
-@startuml
+@startuml Class Diagram
+    +class main{
+
+    }
+    +class Route{
+
+    }
+    +class SingleSelectionScreen{
+        -year: string
+        -raceList: Race[]
+        -raceName: string
+        -driverList: Driver[]
+        -driverNumber: string
+
+        -handleYearSelected(event: SelectChangeEvent): void
+        -handleRaceSelected(event: SelectChangeEvent): void
+        -handleDriverSelected(event: SelectChangeEvent): void
+        -handleSubmit(): void
+    }
+    +class SingleResultsScreen{
+        -year: string
+        -race: string
+        -driverNumber: string
+        -driver: Driver
+        -jsonData: LapJSON
+        -points: Point[]
+        -lapTime: string
+        -place: string
+        -colors: string[]
+        -selected: string
+        -legend: LegendProps
+
+        -readJson(): void
+        -parseLocation(): void
+        -parseMetadata(): void
+        -makeDisplay(): void
+        -handleSelected(_: React.MouseEvent, selection: string): void
+    }
+    +class WelcomeScreen{
+        -handleSubmit1(): void
+        -handleSubmit2(): void
+    }
+    +class ComparisonScreen{
+        -year: string
+        -raceList: Race[]
+        -raceName: string
+        -driverList: Driver[]
+        -firstDriverNumber: string
+        -secondDriverNumber: string
+
+        -handleYearSelected(event: SelectChangeEvent): void
+        -handleRaceSelected(event: SelectChangeEvent): void
+        -handleFirstDriverSelected(event: SelectChangeEvent): void
+        -handleSecondDriverSelected(event: SelectChangeEvent): void
+        -handleSubmit(): void
+    }
+    +class ComparisonResultScreen{
+        
+    }
+    +class LapDisplay{
+        -pts: Point[]
+        -colors: string[]
+        -{final}xs: number[]
+        -{final}ys: number[]
+        -{final}minX: number
+        -{final}maxX: number
+        -{final}minY: number
+        -{final}maxY: number
+        -{final}scaleX: number
+        -{final}scaleY: number
+        -{final}scale: number
+    }
+    +class Legend{
+        -props: LegendProps
+    }
+    +class Driver{
+        +firstName: string
+        +lastName: string
+        +abbreviation: string
+        +number: number
+    }
+
+    +class Race{
+        +year: number
+        +name: string
+        +driversInQ3: number[]
+    }
+
+    +class Point{
+        +x: number
+        +y: number
+    }
+
+    +class LapJSON{
+        +smooth_location: [number, number][]
+        +speed: Array<number>
+        +[key: string]: any
+    }
+    +class LegendProps{
+        +type: string
+        +colors: [string, string]
+        +minLabel: string
+        +maxLabel: string
+        +categories: [string, string][]
+    }
+    main --> Route
+
+    Route ..> WelcomeScreen
+    Route ..> SingleSelectionScreen
+    Route ..> SingleResultsScreen
+    Route ..> ComparisonScreen
+    Route ..> ComparisonResultScreen
+
+    WelcomeScreen --> SingleSelectionScreen
+    WelcomeScreen --> ComparisonScreen
+
+    SingleSelectionScreen --> SingleResultsScreen
+    ComparisonScreen --> ComparisonResultScreen
+
+    SingleSelectionScreen -->"*" Driver
+    SingleSelectionScreen -->"*" Race
+
+    SingleResultsScreen --> Driver
+    SingleResultsScreen --> LapDisplay
+    SingleResultsScreen --> Legend
+    SingleResultsScreen --> LapJSON
+    SingleResultsScreen --> LegendProps
+    ComparisonScreen -->"*" Driver
+    SingleResultsScreen -->"*" Point
+    
+    LapDisplay -->"*" Point
+    Legend --> LegendProps
+
 @enduml
