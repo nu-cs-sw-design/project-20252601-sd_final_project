@@ -6,8 +6,9 @@ Emily Hu
 ## Dependencies
 - React -> Frontend
 - Node.js, npm, Vite -> Build and runtime
-- JS, TS
+- Javascript, Typescript
 - FastF1 API
 
 ## Build Instructions
-npm run dev
+Install dependencies with: npm install
+Run a development server wtih: npm run dev
