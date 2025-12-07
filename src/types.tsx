@@ -16,5 +16,18 @@ type Point = {
   y: number
 };
 
+type LapJSON = {
+  driver: string;
+  lap_time: number;
+  place: number;
+  distance: number[];
+  speed: number[];
+  throttle: number[];
+  brake: boolean[];
+  location: [number, number, number][];
+  time: number[];
+  sector_times: [number, number, number];
+  n_points: number;
+};
 
-export type {Race, Driver, Point};
+export type {Race, Driver, Point, LapJSON};

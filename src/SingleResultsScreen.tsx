@@ -8,25 +8,20 @@ import {
   Stack
 } from "@mui/material";
 
-import type {Point} from "./types.tsx";
+import type {Point, LapJSON} from "./types.tsx";
 import type {LegendProps} from "./LegendProp.tsx";
 import {driverNumberToDriver, driverColor} from "./constants.tsx";
 import LapDisplay from "./LapDisplay.tsx";
 import {Legend} from "./LegendProp.tsx";
 
-type LapJSON = {
-  smooth_location: [number, number][];
-  speed: number[];
-  [key: string]: any; // for any other unknown fields
-};
-
 export default function SingleResultsScreen(){
   const { year, race, driverNumber } = useParams();
   const driver = driverNumberToDriver[Number(driverNumber)];
+  // ok on further reflection, these shouldn't be useStates, if i have time, i'll fix it
   const [jsonData, setJsonData] = useState<LapJSON|null>(null);
   const [points, setPoints] = useState<Point[]>([]);
-  const [lapTime, setLapTime] = useState<string>("");
-  const [place, setPlace] = useState<string>("");
+  const [lapTime, setLapTime] = useState<number>();
+  const [place, setPlace] = useState<number>();
   const [colors, setColors] = useState<string[]>([]);
   const [selected, setSelected] = useState<string>("none");
   const [legend, setLegend] = useState<LegendProps>({type: "none"});
@@ -39,7 +34,7 @@ export default function SingleResultsScreen(){
 
   useEffect(() => { // parseLocation
     if(!jsonData) return;
-    const data = jsonData["location"]
+    const data = jsonData.location
       .map(([x, y, _]: [number, number, number]) => ({ x, y }));
     setPoints(data);
   }, [jsonData]);
@@ -47,8 +42,8 @@ export default function SingleResultsScreen(){
   useEffect(() => { // parseMetadata
     if(!jsonData) return;
 
-    setLapTime(jsonData["lap_time"]);
-    setPlace(jsonData["place"]);
+    setLapTime(jsonData.lap_time);
+    setPlace(jsonData.place);
     if(driverNumber){
       setColors(new Array(points.length).fill(driverColor[Number(driverNumber)]));
     }
@@ -73,7 +68,7 @@ export default function SingleResultsScreen(){
       }
     }
     else if(selected === "brake"){
-      setColors(jsonData["brake"].map((item: boolean) =>{
+      setColors(jsonData.brake.map((item: boolean) =>{
         if(item === true){
           return "green";
         }
@@ -88,7 +83,7 @@ export default function SingleResultsScreen(){
       });
     }
     else if (selected === "throttle") {
-      const throttleValues: number[] = jsonData["throttle"];
+      const throttleValues: number[] = jsonData.throttle;
       const minThrottle = Math.min(...throttleValues);
       const maxThrottle = Math.max(...throttleValues);
 
@@ -160,7 +155,7 @@ export default function SingleResultsScreen(){
         Best Q3 Lap of {race} {year} for {driverNumberToDriver[Number(driverNumber)].firstName} {driverNumberToDriver[Number(driverNumber)].lastName}
       </Typography>
       <Typography variant="h4">
-        Lap Time {lapTime} | Place: {place}
+        Lap Time: {lapTime} | Grid Position: {place}
       </Typography>
       <Stack direction="row" spacing={10} sx={{}}>
         <LapDisplay pts={points} colors={colors}/>

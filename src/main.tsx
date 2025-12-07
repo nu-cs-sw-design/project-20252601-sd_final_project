@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/single" element={<SingleSelectionScreen/>} />
         <Route path="/compare" element={<ComparisonScreen/>} />
         <Route path="/results/:year/:race/:driverNumber" element={<SingleResultsScreen/>} />
-        <Route path="/results/:year/:race/:firstDriverNumber/:secondDriverNumer" element={<ComparisonResultScreen/>} />
+        <Route path="/results/:year/:race/:firstDriverNumber/:secondDriverNumber" element={<ComparisonResultScreen/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

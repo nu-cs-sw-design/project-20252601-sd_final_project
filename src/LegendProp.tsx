@@ -36,7 +36,7 @@ export function Legend(props: LegendProps){
   };
   if (props.type === "categorical"){
     return (
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" spacing={5}>
         {props.categories?.map((item: { label: string; color: string }) => (
           <Stack key={item.label} direction="row" spacing={1} alignItems="center">
             <Box

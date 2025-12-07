@@ -24,8 +24,8 @@
         -driver: Driver
         -jsonData: LapJSON
         -points: Point[]
-        -lapTime: string
-        -place: string
+        -lapTime: number
+        -place: number
         -colors: string[]
         -selected: string
         -legend: LegendProps
@@ -55,7 +55,27 @@
         -handleSubmit(): void
     }
     +class ComparisonResultScreen{
-        
+        -year: string
+        -race: string
+        -firstDriverNumber: string
+        -secondDriverNumber: string
+        -first: number
+        -second: number
+        -drivers: Driver[]
+        -jsonData: LapJSON
+        -points: Point[]
+        -lapTimes: string[]
+        -places: string[]
+        -colors: string[]
+        -legend: LegendProps
+        -selected: string
+
+        -readJson(): void
+        -parseLocation(): void
+        -parseMetadata(): void
+        -makeDisplay(): void
+        -handleSelected(_: React.MouseEvent, selection: string): void
+        +interpolateTimes(distances: number[], times: number[], deltaMeters: number): number[]
     }
     +class LapDisplay{
         -pts: Point[]
@@ -92,10 +112,19 @@
     }
 
     +class LapJSON{
-        +smooth_location: [number, number][]
-        +speed: Array<number>
-        +[key: string]: any
+        +driver: string
+        +lap_time: number
+        +place: number
+        +distance: number[]
+        +speed: number[]
+        +throttle: number[]
+        +brake: boolean
+        +location: [number, number, number][]
+        +time: number[]
+        +sector_times: [number, number, number]
+        +n_points: number
     }
+
     +class LegendProps{
         +type: string
         +colors: [string, string]
