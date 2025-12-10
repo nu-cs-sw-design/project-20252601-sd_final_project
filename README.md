@@ -16,20 +16,20 @@ Run a development server wtih: npm run dev
 
 
 ## Images
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/welcome.png" width="48">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/welcome.png" width="150">
 
 Single Driver Flow:
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single1.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single2.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single3.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single4.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single5.png" width="48">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single1.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single2.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single3.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single4.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single5.png" width="150">
 
 
 2 Driver Flow:
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double1.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double2.png" width="48">
-<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double3.png" width="48">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double1.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double2.png" width="150">
+<img src="https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double3.png" width="150">
 
 
 
