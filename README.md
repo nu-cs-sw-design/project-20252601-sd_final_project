@@ -16,19 +16,19 @@ Run a development server wtih: npm run dev
 
 
 ## Images
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/welcome.png)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/welcome.png | width=100)
 
 Single Driver Flow:
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single1.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single2.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single3.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single4.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single5.png)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single1.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single2.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single3.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single4.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/single5.png | width=100)
 
 2 Driver Flow:
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double1.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double2.png)
-![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double3.png)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double1.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double2.png | width=100)
+![Welcome Screen](https://github.com/nu-cs-sw-design/project-20252601-sd_final_project/blob/main/demo/double3.png | width=100)
 
 
 
