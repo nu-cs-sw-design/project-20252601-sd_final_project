@@ -86,7 +86,7 @@ export default function SingleSelectionScreen(){
           </Select>
         </FormControl>
 
-        <FormControl fullWidth margin="normal" disabled={year === undefined} sx={{minWidth: 200}}>
+        <FormControl fullWidth margin="normal" disabled={year === ""} sx={{minWidth: 200}}>
           <InputLabel>Race</InputLabel>
           <Select value={raceName} label="Race" onChange={handleRaceSelected}>
             {raceList.map((race) => (

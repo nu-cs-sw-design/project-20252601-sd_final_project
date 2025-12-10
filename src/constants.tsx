@@ -25,7 +25,9 @@ driversInQ3: [1, 11, 4, 81, 63, 44, 16, 55, 18, 23]
 
 const driverColor: Record<number, string> = {
   1: "Blue",
-  81: "Orange"
+  81: "Orange",
+  44: "Red",
+  14: "Green"
 };
 
 export {drivers, driverNumberToDriver, races, driverColor};
