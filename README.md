@@ -11,4 +11,5 @@ Emily Hu
 
 ## Build Instructions
 Install dependencies with: npm install
+
 Run a development server wtih: npm run dev
