@@ -8,10 +8,7 @@ interface LapDisplayProps{
 const canvasWidth = 800;
 const canvasHeight = 600;
 
-export default function LapDisplay({ pts, colors }: LapDisplayProps){
-  console.log("AAAAAAA")
-  console.log(pts);
-  console.log(colors);
+export default function LapDisplay({ pts, colors }: LapDisplayProps){;
   if(pts.length === 0) return null; // or a loading placeholder
   const xs = pts.map(p => p.x);
   const ys = pts.map(p => p.y);
